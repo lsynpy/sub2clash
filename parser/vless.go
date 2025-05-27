@@ -80,7 +80,7 @@ func ParseVless(proxy string) (model.Proxy, error) {
 		result.Servername = sni
 		result.RealityOpts = model.RealityOptions{
 			PublicKey: pbk,
-			ShortID:   sid,
+			ShortID:   model.QuotedString(sid),
 		}
 		result.ClientFingerprint = fp
 	}

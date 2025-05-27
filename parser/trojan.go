@@ -86,7 +86,7 @@ func ParseTrojan(proxy string) (model.Proxy, error) {
 		result.Sni = sni
 		result.RealityOpts = model.RealityOptions{
 			PublicKey: pbk,
-			ShortID:   sid,
+			ShortID:   model.QuotedString(sid),
 		}
 		result.Fingerprint = fp
 	}

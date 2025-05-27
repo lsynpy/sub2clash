@@ -1,5 +1,20 @@
 package model
 
+import (
+	"gopkg.in/yaml.v3"
+)
+
+type QuotedString string
+
+func (s QuotedString) MarshalYAML() (interface{}, error) {
+	return &yaml.Node{
+		Kind:  yaml.ScalarNode,
+		Value: string(s),
+		Tag:   "!!str",
+		Style: yaml.SingleQuotedStyle,
+	}, nil
+}
+
 type HTTPOptions struct {
 	Method  string              `yaml:"method,omitempty"`
 	Path    []string            `yaml:"path,omitempty"`
@@ -16,8 +31,8 @@ type GrpcOptions struct {
 }
 
 type RealityOptions struct {
-	PublicKey string `yaml:"public-key"`
-	ShortID   string `yaml:"short-id,omitempty"`
+	PublicKey string       `yaml:"public-key"`
+	ShortID   QuotedString `yaml:"short-id,omitempty"`
 }
 
 type WSOptions struct {
